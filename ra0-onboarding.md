@@ -42,7 +42,7 @@ Una vez ejecutado el IDE por primera vez, realiza las siguientes configuraciones
 * **Descargar y Configurar el SDK (JDK):**
   1. Ve a `File` -> `Project Structure` -> `SDKs`.
   2. Haz clic en el botón `+` (Add SDK) -> `Download JDK`.
-  3. Selecciona la versión **Java 17** (o la versión recomendada para el curso) y la distribución (ej. Eclipse Temurin o Oracle OpenJDK).
+  3. Selecciona la versión **Java 21** (o la versión recomendada para el curso) y la distribución (ej. Eclipse Temurin o Oracle OpenJDK).
   4. **Importante:** Establece la ruta de descarga dentro de la carpeta portable que creaste en el paso anterior:
      `C:\apuntes-aad\intellij-idea-community-portable\jdks\`
 * **Acciones al Guardar (Actions on Save):**
@@ -106,7 +106,7 @@ Entra en [Spring Initializr](https://start.spring.io/) y define la estructura t�
 
 * **Project:** Maven
 * **Language:** Java
-* **Spring Boot:** 3.5.5 (o la versión de producción estable más reciente)
+* **Spring Boot:** 4.1.1 (o la versión de producción estable más reciente)
 * **Project Metadata:**
   * **Group:** `com.fencgut961` (Dominio del proyecto inverso)
   * **Artifact:** `aad` (Identificador del proyecto de Acceso a Datos)
@@ -114,7 +114,8 @@ Entra en [Spring Initializr](https://start.spring.io/) y define la estructura t�
   * **Description:** Proyecto base para el módulo de Acceso a Datos
   * **Package name:** `com.fencgut961.aad`
   * **Packaging:** Jar
-  * **Java:** 17 (asegúrate de que coincida con el JDK descargado en tu IntelliJ portable)
+  * **Configuration:** YAML
+  * **Java:** 21 (asegúrate de que coincida con el JDK descargado en tu IntelliJ portable)
 * **Dependencies:**
   * Haz clic en **Add Dependencies** y añade **Spring Web** (necesaria para habilitar los componentes REST de la aplicación).
 
@@ -180,7 +181,7 @@ Asegúrate de que el plugin de Lombok está instalado y activo en tu entorno de 
    `Settings` -> `Build, Execution, Deployment` -> `Compiler` -> `Annotation Processors`
    * Activa la casilla: **[x] Enable annotation processing**.
 
-### 4.2 Añadir la Dependencia en el POM
+### 4.2 Añadir la Dependencia en el POM (si no se selecciono al crear el proyecto)
 Para que Maven sepa que debe inyectar Lombok durante la fase de compilación, abre tu archivo `pom.xml` y añade la siguiente dependencia dentro de la sección `<dependencies>`:
 
 ```xml
@@ -251,17 +252,15 @@ En lugar de lanzar comandos largos por consola, utilizaremos un archivo declarat
 3. Añade la configuración que define el contenedor de PostgreSQL, su puerto, credenciales de acceso y un volumen físico persistente para no perder los datos al apagar el contenedor:
 
 ```yaml
-version: '3.8'
-
 services:
   database:
     image: postgres:15-alpine
-    container_name: postgres_aad_container
+    container_name: postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespassword
-      POSTGRES_DB: acceso_datos
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_pass
+      POSTGRES_DB: aad
     ports:
       - "5432:5432"
     volumes:
@@ -308,9 +307,9 @@ Para gestionar el ciclo de vida de tu base de datos contenerizada, ejecuta los s
 3. Completa los campos del formulario con los parámetros que declaraste en tu archivo `docker-compose.yml`:
    * **Host:** `localhost`
    * **Port:** `5432`
-   * **Database:** `acceso_datos`
-   * **Username:** `postgres`
-   * **Password:** `postgrespassword`
+   * **Database:** `aad`
+   * **Username:** `postgres_user`
+   * **Password:** `postgres_pass`
 4. Haz clic en el botón **Test Connection**. 
    * *Nota: La primera vez que lo hagas, DBeaver te solicitará permiso para descargar automáticamente los drivers JDBC necesarios para conectarse a PostgreSQL. Haz clic en "Download" e instálalos.*
 5. Si todo está correcto y el contenedor de Docker sigue activo, se mostrará un mensaje de conexión exitosa (**Success**). Haz clic en *Finish* para guardar el perfil de conexión.
