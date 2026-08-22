@@ -119,7 +119,7 @@ Entra en [Spring Initializr](https://start.spring.io/) y define la estructura t�
 * **Dependencies:**
   * Haz clic en **Add Dependencies** y añade **Spring Web** (necesaria para habilitar los componentes REST de la aplicación).
 
-![Configuración de Spring Initializr](/img/spring-initializr.png)
+![Configuración de Spring Initializr](img/spring-initializr.png)
 
 ### 3.2 Generación e Integración
 1. Haz clic en el botón **Generate** (o pulsa `Ctrl + Enter`) para descargar el archivo ZIP autogenerado.
