@@ -117,7 +117,9 @@ Entra en [Spring Initializr](https://start.spring.io/) y define la estructura t�
   * **Configuration:** YAML
   * **Java:** 21 (asegúrate de que coincida con el JDK descargado en tu IntelliJ portable)
 * **Dependencies:**
-  * Haz clic en **Add Dependencies** y añade **Spring Web** (necesaria para habilitar los componentes REST de la aplicación).
+  * Haz clic en **Add Dependencies** y añade:
+    * **Spring Web** (necesaria para habilitar los componentes REST de la aplicación).
+    * **Lombok** (la usaremos para el punto 4)
 
 ![Configuración de Spring Initializr](img/spring-initializr.png)
 
