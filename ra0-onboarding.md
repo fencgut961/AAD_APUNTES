@@ -215,7 +215,7 @@ public class AadApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("=== [LOMBOK STATUS]: Lombok ON e inyectado correctamente en el compilador ===");
+        log.info("=== [LOMBOK STATUS]: Lombok ON ===");
     }
 }
 ```
